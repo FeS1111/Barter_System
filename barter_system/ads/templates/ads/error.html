@@ -1,0 +1,6 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h2>Ошибка</h2>
+  <div class="error">{{ message }}</div>
+  <a href="{% url 'ad_list' %}" class="btn" style="background:#bbb;color:#222;">Назад</a>
+{% endblock %}

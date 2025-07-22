@@ -1,0 +1,10 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h2>Новое предложение обмена</h2>
+  <form method="post" style="margin-bottom:18px;">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn" style="background:#357;">Отправить</button>
+    <a href="{% url 'ad_list' %}" class="btn" style="background:#bbb;color:#222;">Назад</a>
+  </form>
+{% endblock %}

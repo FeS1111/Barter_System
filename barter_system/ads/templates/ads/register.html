@@ -1,0 +1,12 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h2>Регистрация</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div> Логин: {{ form.username }}</div>
+    <div> Пароль: {{ form.password1 }}</div>
+    <div> Повторите пароль: {{ form.password2 }}</div>
+    <button type="submit" class="btn">Зарегистрироваться</button>
+    <a href="{% url 'login' %}" class="btn" style="background:#bbb;color:#222;">Войти</a>
+  </form>
+{% endblock %}

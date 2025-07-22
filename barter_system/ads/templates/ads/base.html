@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Бартерная система</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        color: #222;
+        margin: 0;
+      }
+      .main {
+        width: 95%;
+        max-width: 650px;
+        margin: 36px auto 0 auto;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 9px;
+        padding: 24px 20px 20px 20px;
+        box-shadow: 0 1px 10px #0001;
+      }
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+      }
+      .navbar {
+        background: #eee;
+        padding: 12px 0 12px 18px;
+        border-bottom: 1px solid #ddd;
+        font-size: 15px;
+      }
+      .navbar a {
+        color: #357;
+        text-decoration: none;
+        margin-left: 10px;
+      }
+      .navbar b {
+        color: #111;
+      }
+      .btn {
+        display: inline-block;
+        background: #357;
+        color: #fff !important;
+        border: none;
+        border-radius: 5px;
+        padding: 4px 13px;
+        font-size: 15px;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 3px 2px;
+      }
+      .btn:hover {
+        background: #234;
+      }
+      .simple-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 18px 0;
+      }
+      .simple-list li {
+        background: #fafafa;
+        border: 1px solid #eee;
+        border-radius: 6px;
+        padding: 10px 14px 6px 14px;
+        margin-bottom: 10px;
+      }
+      .form-row {
+        margin-bottom: 11px;
+      }
+      input[type="text"], select {
+        padding: 4px 9px;
+        border-radius: 4px;
+        border: 1px solid #bbb;
+        font-size: 15px;
+        margin-right: 7px;
+      }
+      .pagination {
+        margin-top: 15px;
+        font-size: 14px;
+      }
+      .error {
+        background: #fde2e2;
+        color: #a33;
+        border-left: 4px solid #f33;
+        margin-bottom: 12px;
+        padding: 7px 11px;
+        border-radius: 5px;
+      }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+      Бартерная система
+      <span style="float:right;margin-right:18px;">
+        {% if user.is_authenticated %}
+            Вы вошли как <b>{{ user.username }}</b>
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn" style="background:#f77;">Выйти</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Войти</a> | <a href="{% url 'register' %}">Регистрация</a>
+        {% endif %}
+      </span>
+    </div>
+    <div class="main">
+      {% block content %}
+      {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h2>Мои предложения обмена</h2>
+
+  <form method="get" style="margin-bottom:20px;">
+    <input type="text" name="sender" placeholder="Отправитель" value="{{ request.GET.sender }}">
+    <input type="text" name="receiver" placeholder="Получатель" value="{{ request.GET.receiver }}">
+    <select name="status">
+      <option value="">Все статусы</option>
+      <option value="pending" {% if request.GET.status == "pending" %}selected{% endif %}>Ожидает</option>
+      <option value="accepted" {% if request.GET.status == "accepted" %}selected{% endif %}>Принята</option>
+      <option value="declined" {% if request.GET.status == "declined" %}selected{% endif %}>Отклонена</option>
+    </select>
+    <button type="submit" class="btn">Фильтровать</button>
+    {% if request.GET.sender or request.GET.receiver or request.GET.status %}
+      <a href="{% url 'exchange_proposal_list' %}" class="btn" style="background:#bbb;color:#222;">Сбросить</a>
+    {% endif %}
+  </form>
+
+  <ul class="simple-list">
+    {% for proposal in proposals %}
+      <li>
+        <div>
+          <b>Отправитель:</b> {{ proposal.ad_sender.user.username }}<br>
+          <b>Объявление отправителя:</b> "{{ proposal.ad_sender.title }}"<br>
+          <b>Получатель:</b> {{ proposal.ad_receiver.user.username }}<br>
+          <b>Объявление получателя:</b> "{{ proposal.ad_receiver.title }}"<br>
+          <span style="color:#345;"><b>Статус:</b> {{ proposal.get_status_display }}</span><br>
+          <span style="color:#777;"><b>Комментарий:</b> {{ proposal.comment }}</span>
+        </div>
+        {% if proposal.status == 'pending' and proposal.ad_receiver.user == user %}
+          <div style="margin-top:8px;">
+            <a href="{% url 'exchange_proposal_update' proposal.pk %}" class="btn" style="background:#36b;">Ответить</a>
+          </div>
+        {% endif %}
+      </li>
+    {% empty %}
+      <li style="background:none; border:none;">Нет предложений обмена.</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'ad_list' %}" class="btn" style="background:#bbb;color:#222;">Назад к объявлениям</a>
+{% endblock %}

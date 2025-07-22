@@ -1,0 +1,16 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h2>Ответ на предложение обмена</h2>
+  <form method="post" style="margin-bottom:18px;">
+    {% csrf_token %}
+    <div class="form-row" style="margin-bottom:12px;">
+      <label for="status">Выберите статус:</label><br>
+      <select name="status" id="status">
+        <option value="accepted">Принять</option>
+        <option value="declined">Отклонить</option>
+      </select>
+    </div>
+    <button type="submit" class="btn" style="background:#28a745;">Сохранить</button>
+    <a href="{% url 'exchange_proposal_list' %}" class="btn" style="background:#bbb;color:#222;">Назад</a>
+  </form>
+{% endblock %}

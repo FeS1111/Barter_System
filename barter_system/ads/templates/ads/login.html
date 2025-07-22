@@ -1,0 +1,13 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h2>Вход</h2>
+  {% if form.errors %}
+    <div class="error">Неправильный логин или пароль</div>
+  {% endif %}
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Войти</button>
+    <a href="{% url 'register' %}" class="btn" style="background:#bbb;color:#222;">Регистрация</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "ads/base.html" %}
+{% block content %}
+  <h1>Объявления</h1>
+  <form method="get" class="form-row">
+    <input type="text" name="search" placeholder="Поиск..." value="{{ request.GET.search }}">
+    <input type="text" name="category" placeholder="Категория" value="{{ request.GET.category }}">
+    <select name="condition">
+      <option value="">Состояние</option>
+      <option value="new">Новый</option>
+      <option value="used">Б/У</option>
+    </select>
+    <button type="submit" class="btn">Найти</button>
+    <a href="{% url 'ad_create' %}" class="btn" style="background:#387;">+ Новое объявление</a>
+  </form>
+  <ul class="simple-list">
+    {% for ad in ads %}
+      <li>
+        <div style="font-weight:bold;">{{ ad.title }}</div>
+        <div style="color:#555; font-size: 0.95em;">{{ ad.category }}, {{ ad.get_condition_display }}</div>
+        <div style="margin:7px 0 2px 0;">{{ ad.description }}</div>
+        <div>
+          <a href="{% url 'ad_update' ad.pk %}" class="btn" style="background:#fa5;">Изменить</a>
+          <a href="{% url 'ad_delete' ad.pk %}" class="btn" style="background:#e66;">Удалить</a>
+          <a href="{% url 'exchange_proposal_create' ad.pk %}" class="btn" style="background:#3aa;">Предложить обмен</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <div class="pagination">
+    {% if ads.has_previous %}
+      <a href="?page={{ ads.previous_page_number }}" class="btn">Назад</a>
+    {% endif %}
+    Страница {{ ads.number }} из {{ ads.paginator.num_pages }}
+    {% if ads.has_next %}
+      <a href="?page={{ ads.next_page_number }}" class="btn">Вперед</a>
+    {% endif %}
+  </div>
+  <div style="margin-top:15px;">
+    <a href="{% url 'exchange_proposal_list' %}" class="btn" style="background:#efc426;color:#222;">Мои предложения</a>
+  </div>
+{% endblock %}

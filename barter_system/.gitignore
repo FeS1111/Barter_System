@@ -1,0 +1,67 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.db
+*.sqlite3
+
+# Local settings
+*.env
+.env.*
+*.local
+secrets.json
+
+# Django media/static
+media/
+staticfiles/
+static/
+# Ignore collected static files (Django collectstatic)
+static_root/
+
+# VSCode, PyCharm, Sublime project/workspace settings
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# PostgreSQL
+*.pgsql
+*.psql
+
+# Test, coverage, profiling
+htmlcov/
+.tox/
+.coverage
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+*.test
+*.log
+test-results/
+.junit/
+
+migrations (оставь, если нужен полный backup)
+*/migrations/*.pyc
+*/migrations/__pycache__/
+
