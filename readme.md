@@ -94,7 +94,7 @@ python manage.py test
 git clone <your_repo_url>
 cd <project_folder>
 python -m venv venv
-venv\Scripts\activate для Windows,<br> source venv/bin/activate  для Linux/Mac
+venv\Scripts\activate для Windows, source venv/bin/activate  для Linux/Mac
 pip install -r requirements.txt
 ```
 
